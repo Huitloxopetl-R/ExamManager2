@@ -2,7 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.app.mapper.ManagerMapper">
-    <select id="findAll" resultType="com.example.app.model.Examinee">
-
+    <resultMap id="ExamineeWithData" type="com.example.app.model.Examinee">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="date" column="date" />
+        <association property="examData" javaType="com.example.app.model.ExamData">
+            <id property="id" column="id" />
+            <result property="japanese" column="japanese" />
+            <result property="math" column="math" />
+            <result property="english" column="english" />
+            <result property="japanese_history" column="japanese_history" />
+            <result property="world_history" column="world_history" />
+            <result property="geography" column="geography" />
+            <result property="physics" column="physics" />
+            <result property="chemistry" column="chemistry" />
+            <result property="biology" column="biology" />
+        </association>
+    </resultMap>
+    <select id="findAll" resultType="com.example.app.model.ExamManager">
+        SELECT * FROM examinee AS e JOIN exam_data AS ed ON e.id=ed.id GROUP BY name ORDER BY date;
     </select>
+    <update id="updateResult">
+        UPDATE examinee AS e JOIN exam_data AS ed ON e.id=ed.id SET
+        <if test="name != null">
+            name=#{name}
+        </if>
+    </update>
+    <delete id="deleteOne">
+        DELETE FROM examinee AS e JOIN exam_data AS ed ON e.id=ed.id WHERE name=#{name} AND date=#{date}
+    </delete>
+    <delete id="deleteName">
+        DELETE FROM examinee AS e JOIN exam_data AS ed ON e.id=ed.id WHERE name=#{name}
+    </delete>
 </mapper>
