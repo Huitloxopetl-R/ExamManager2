@@ -2,13 +2,9 @@ package com.example.app.model;
 
 import lombok.Data;
 
-import java.time.LocalDate;
-
 @Data
-public class ExamManager {
+public class ExamData {
     private int id;
-    private String name;
-    private LocalDate date;
     private int japanese;
     private int math;
     private int english;

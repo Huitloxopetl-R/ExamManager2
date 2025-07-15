@@ -2,11 +2,46 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Messages</title>
+    <title>Exam Manager</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <script th:src="@{common.js}"></script>
 </head>
 <body>
-
+<h1>試験管理ツール</h1>
+<table>
+    <thead>
+    <tr>
+        <th>受験者名</th>
+        <th>試験実施日</th>
+        <th>国語</th>
+        <th>数学</th>
+        <th>英語</th>
+        <th>社会</th>
+        <th>理科</th>
+        <th>合計</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ex: ${examResults}">
+        <td th:text="${ex.name}"></td>
+        <td th:text="${ex.date}"></td>
+        <td th:text="${ex.japanese}"></td>
+        <td th:text="${ex.math}"></td>
+        <td th:text="${ex.english}"></td>
+        <td th:text="${ex.worldHistory + ex.japaneseHistory + ex.geography}"></td>
+        <td th:text="${ex.physics + ex.chemistry + ex.biology}"></td>
+        <td>
+            <form th:action="@{/update}" method="post">
+                <input type="hidden" name="id" th:value="${ex.id}" />
+                <button type="submit">更新</button>
+            </form>
+            <form th:action="@{/delete}" method="post">
+                <input type="hidden" name="id" th:value="${ex.id}" />
+                <button type="submit">削除</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
