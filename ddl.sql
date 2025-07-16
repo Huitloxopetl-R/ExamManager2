@@ -1,5 +1,5 @@
 -- Project Name : noname
--- Date/Time    : 2025/07/15 15:45:25
+-- Date/Time    : 2025/07/16 17:41:00
 -- Author       : Rei Hayakawa
 -- RDBMS Type   : PostgreSQL
 -- Application  : A5:SQL Mk-2
@@ -15,7 +15,7 @@
 -- exam_data
 -- * RestoreFromTempTable
 CREATE TABLE exam_data (
-  id serial NOT NULL
+  id integer NOT NULL
   , japanese integer NOT NULL
   , math integer NOT NULL
   , english integer NOT NULL

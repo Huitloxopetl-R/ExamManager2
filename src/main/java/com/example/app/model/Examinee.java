@@ -1,6 +1,7 @@
 package com.example.app.model;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -8,5 +9,6 @@ import java.time.LocalDate;
 public class Examinee {
     private int id;
     private String name;
-    private LocalDate date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd") private LocalDate date;
+    public int getId(){ return id; }
 }

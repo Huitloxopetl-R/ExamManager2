@@ -20,16 +20,71 @@
         </association>
     </resultMap>
     <select id="findAll" resultType="com.example.app.model.ExamManager">
-        SELECT * FROM examinee AS e JOIN exam_data AS ed ON e.id=ed.id GROUP BY name ORDER BY date;
+        SELECT * FROM examinee AS e JOIN exam_data AS ed ON e.id=ed.id ORDER BY date
     </select>
+    <insert id="insertExaminee" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO examinee (name, date) VALUES (#{name}, #{date})
+    </insert>
+    <insert id="insertExamData">
+        INSERT INTO exam_data (id, japanese, math, english, world_history, biology)
+        VALUES (#{id}, #{japanese}, #{math}, #{english}, 0, 0)
+    </insert>
     <update id="updateResult">
-        UPDATE examinee AS e JOIN exam_data AS ed ON e.id=ed.id SET
-        <if test="name != null">
-            name=#{name}
-        </if>
+        UPDATE examinee AS e JOIN exam_data AS ed ON e.id=ed.id
+        <set>
+            <if test="name != null">
+                name=#{name},
+            </if>
+            <if test="date != null">
+                date=#{date},
+            </if>
+            <if test="japanese != null">
+                japanese=#{japanese},
+            </if>
+            <if test="math != null">
+                math=#{math},
+            </if>
+            <if test="english != null">
+                english=#{english},
+            </if>
+            <if test="japaneseHistory != null">
+                japanese_history=#{japaneseHistory},
+                world_history=null,
+                geography=null,
+            </if>
+            <if test="worldHistory != null">
+                japanese_history=null,
+                world_history=#{worldHistory},
+                geography=null,
+            </if>
+            <if test="geography != null">
+                japanese_history=null,
+                world_history=null,
+                geography=#{geography},
+            </if>
+            <if test="physics != null">
+                physics=#{physics},
+                chemistry=null,
+                biology=null,
+            </if>
+            <if test="chemistry != null">
+                physics=null,
+                chemistry=#{chemistry},
+                biology=null,
+            </if>
+            <if test="biology != null">
+                physics=null,
+                chemistry=null,
+                biology=#{biology}
+            </if>
+        </set>
+        WHERE e.id=#{id}
     </update>
-    <delete id="deleteOne">
-        DELETE FROM examinee AS e JOIN exam_data AS ed ON e.id=ed.id WHERE name=#{name} AND date=#{date}
+    <delete id="deleteOneExaminee">
+        DELETE FROM examinee WHERE id=#{id}
+    </delete>
+    <delete id="deleteOneExamData">
+        DELETE FROM exam_data WHERE id=#{id}
     </delete>
     <delete id="deleteName">
         DELETE FROM examinee AS e JOIN exam_data AS ed ON e.id=ed.id WHERE name=#{name}

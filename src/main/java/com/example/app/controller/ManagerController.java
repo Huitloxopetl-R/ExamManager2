@@ -1,6 +1,7 @@
 package com.example.app.controller;
 
 import com.example.app.mapper.ManagerMapper;
+import com.example.app.model.ExamData;
 import com.example.app.model.ExamManager;
 import com.example.app.model.Examinee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,16 @@ public class ManagerController {
         return "index";
     }
 
+    @PostMapping("/create")
+    public String insertResult(@ModelAttribute final Examinee examinee, @ModelAttribute final ExamData examData, final Model model) {
+        mapper.insertExaminee(examinee);
+        examData.setId(examinee.getId());
+        mapper.insertExamData(examData);
+        final List<ExamManager> exResults = mapper.findAll();
+        model.addAttribute("examResults", exResults);
+        return "index";
+    }
+
     @PostMapping("/update")
     public String updateResult(@ModelAttribute final ExamManager examManager, final Model model) {
         mapper.updateResult(examManager);
@@ -35,7 +46,8 @@ public class ManagerController {
 
     @PostMapping("/delete-one")
     public String deleteOne(@ModelAttribute final Examinee examinee, final Model model) {
-        mapper.deleteOne(examinee);
+        mapper.deleteOneExaminee(examinee);
+        mapper.deleteOneExamData(examinee);
         final List<ExamManager> exResults = mapper.findAll();
         model.addAttribute("examResults", exResults);
         return "index";
