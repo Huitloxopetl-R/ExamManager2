@@ -14,4 +14,5 @@ public class ExamData {
     private int physics;
     private int chemistry;
     private int biology;
+    public void setId(final int id){ this.id = id; }
 }
