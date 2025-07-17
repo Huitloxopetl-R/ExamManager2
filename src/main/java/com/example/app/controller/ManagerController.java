@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -36,9 +37,17 @@ public class ManagerController {
         return "index";
     }
 
+    @GetMapping("/update")
+    public String updateTarget(@ModelAttribute final ExamManager examManager, @RequestParam("id") final int id, final Model model) {
+        final ExamManager exResult = mapper.findUpdatee(id);
+        model.addAttribute("examResult", exResult);
+        return "update";
+    }
+
     @PostMapping("/update")
-    public String updateResult(@ModelAttribute final ExamManager examManager, final Model model) {
-        mapper.updateResult(examManager);
+    public String updateResult(@ModelAttribute final Examinee examinee, @ModelAttribute final ExamData examData, final Model model) {
+        mapper.updateExaminee(examinee);
+        mapper.updateExamData(examData);
         final List<ExamManager> exResults = mapper.findAll();
         model.addAttribute("examResults", exResults);
         return "index";

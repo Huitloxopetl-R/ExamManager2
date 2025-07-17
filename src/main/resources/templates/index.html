@@ -38,10 +38,9 @@
         </td>
         <td th:text="${ex.sum}"></td>
         <td>
-            <form th:action="@{/update}" method="post">
-                <input type="hidden" name="id" th:value="${ex.id}" />
+            <a th:href="@{/update(id=${ex.id})}">
                 <button type="submit">更新</button>
-            </form>
+            </a>
             <form th:action="@{/delete-one}" method="post">
                 <input type="hidden" name="id" th:value="${ex.id}" />
                 <button type="submit">削除</button>
@@ -54,24 +53,28 @@
 <footer>
     <form th:action="@{/create}" method="post">
         <input type="text" name="name" placeholder="名前" required />
-        <input type="date" name="date" class="date-input" />
-        <input type="number" name="japanese" placeholder="国語" required class="content-input" />
-        <input type="number" name="math" placeholder="数学" required class="content-input" />
-        <input type="number" name="english" placeholder="英語" required class="content-input" />
-        <select name="societySub" required class="content-input">
-            <option value="">社会科目を選択</option>
-            <option value="japaneseHistory">日本史</option>
-            <option value="worldHistory">世界史</option>
-            <option value="geography">地理</option>
-        </select>
-        <input type="number" name="society" placeholder="社会" required class="content-input" />
-        <select name="scienceSub" required class="content-input">
-            <option value="">理科科目を選択</option>
-            <option value="physics">物理</option>
-            <option value="chemistry">化学</option>
-            <option value="biology">生物</option>
-        </select>
-        <input type="number" name="science" placeholder="理科" required class="content-input" />
+        <input type="date" name="date" required />
+        <input type="number" name="japanese" placeholder="国語" required />
+        <input type="number" name="math" placeholder="数学" required />
+        <input type="number" name="english" placeholder="英語" required />
+        <div class="sub-box">
+            <select name="societySub" id="societySub">
+                <option value="">社会科目を選択</option>
+                <option value="japaneseHistory">日本史</option>
+                <option value="worldHistory">世界史</option>
+                <option value="geography">地理</option>
+            </select>
+            <input type="number" name="society" placeholder="社会" required />
+        </div>
+        <div class="sub-box">
+            <select name="scienceSub" id="scienceSub">
+                <option value="">理科科目を選択</option>
+                <option value="physics">物理</option>
+                <option value="chemistry">化学</option>
+                <option value="biology">生物</option>
+            </select>
+            <input type="number" name="science" placeholder="理科" required class="content-input" />
+        </div>
         <button type="submit">送信</button>
     </form>
 </footer>
