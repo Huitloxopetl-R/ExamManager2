@@ -26,11 +26,36 @@
         INSERT INTO examinee (name, date) VALUES (#{name}, #{date})
     </insert>
     <insert id="insertExamData">
-        INSERT INTO exam_data (id, japanese, math, english, world_history, biology)
-        VALUES (#{id}, #{japanese}, #{math}, #{english}, 0, 0)
+        INSERT INTO exam_data (id, japanese, math, english,
+        <choose>
+            <when test="societySub == 'japaneseHistory'">
+                japanese_history,
+            </when>
+            <when test="societySub == 'worldHistory'">
+                world_history,
+            </when>
+            <when test="societySub == 'geography'">
+                geography,
+            </when>
+        </choose>
+        <choose>
+            <when test="scienceSub == 'physics'">
+                physics
+            </when>
+            <when test="scienceSub != 'chemistry'">
+                chemistry
+            </when>
+            <when test="scienceSub != 'biology'">
+                biology
+            </when>
+        </choose>
+        ) VALUES (#{id}, #{japanese}, #{math}, #{english}, #{society}, #{science})
     </insert>
-    <update id="updateResult">
-        UPDATE examinee AS e JOIN exam_data AS ed ON e.id=ed.id
+    <select id="findUpdatee" resultType="com.example.app.model.ExamManager">
+        SELECT * FROM examinee AS e JOIN exam_data AS ed ON e.id=ed.id WHERE e.id=#{id}
+    </select>
+    <update id="updateExaminee">
+        UPDATE examinee
         <set>
             <if test="name != null">
                 name=#{name},
@@ -38,6 +63,12 @@
             <if test="date != null">
                 date=#{date},
             </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+    <update id="updateExamData">
+        UPDATE exam_data
+        <set>
             <if test="japanese != null">
                 japanese=#{japanese},
             </if>
@@ -47,38 +78,52 @@
             <if test="english != null">
                 english=#{english},
             </if>
-            <if test="japaneseHistory != null">
-                japanese_history=#{japaneseHistory},
-                world_history=null,
-                geography=null,
-            </if>
-            <if test="worldHistory != null">
-                japanese_history=null,
-                world_history=#{worldHistory},
-                geography=null,
-            </if>
-            <if test="geography != null">
-                japanese_history=null,
-                world_history=null,
-                geography=#{geography},
-            </if>
-            <if test="physics != null">
-                physics=#{physics},
-                chemistry=null,
-                biology=null,
-            </if>
-            <if test="chemistry != null">
-                physics=null,
-                chemistry=#{chemistry},
-                biology=null,
-            </if>
-            <if test="biology != null">
-                physics=null,
-                chemistry=null,
-                biology=#{biology}
-            </if>
+            <choose>
+                <when test="societySub == 'japaneseHistory'">
+                    japanese_history=#{society},
+                    world_history=null,
+                    geography=null,
+                </when>
+                <when test="societySub == 'worldHistory'">
+                    japanese_history=null,
+                    world_history=#{society},
+                    geography=null,
+                </when>
+                <when test="societySub == 'geography'">
+                    japanese_history=null,
+                    world_history=null,
+                    geography=#{society},
+                </when>
+                <otherwise>
+                    japanese_history=null,
+                    world_history=null,
+                    geography=null,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="scienceSub == 'physics'">
+                    physics=#{science},
+                    chemistry=null,
+                    biology=null,
+                </when>
+                <when test="scienceSub != 'chemistry'">
+                    physics=null,
+                    chemistry=#{science},
+                    biology=null,
+                </when>
+                <when test="scienceSub != 'biology'">
+                    physics=null,
+                    chemistry=null,
+                    biology=#{science},
+                </when>
+                <otherwise>
+                    physics=null,
+                    chemistry=null,
+                    biology=null,
+                </otherwise>
+            </choose>
         </set>
-        WHERE e.id=#{id}
+        WHERE id=#{id}
     </update>
     <delete id="deleteOneExaminee">
         DELETE FROM examinee WHERE id=#{id}

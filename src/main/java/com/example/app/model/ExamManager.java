@@ -4,26 +4,22 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Data
 public class ExamManager {
     private int id;
     private String name;
-    private LocalDate date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd") private LocalDate date;
     private int japanese;
     private int math;
     private int english;
-//    private int social;
-//    private int science;
-//    private String socialSub;
-//    private String scienceSub;
     private Integer japaneseHistory;
     private Integer worldHistory;
     private Integer geography;
     private Integer physics;
     private Integer chemistry;
     private Integer biology;
+
     public int getSociety() {
         assert japaneseHistory != null || worldHistory != null || geography != null;
         if(japaneseHistory != null) {
