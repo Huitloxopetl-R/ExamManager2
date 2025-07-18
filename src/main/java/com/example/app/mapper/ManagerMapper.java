@@ -13,6 +13,8 @@ import java.util.List;
 public interface ManagerMapper {
     public List<ExamManager> findAll();
     public ExamManager findUpdatee(@RequestParam("id") final int id);
+
+    // TODO: @ModelAttributeはここで使用しても無効だという話をしたと思います。どういう意図で書いているのでしょうか。
     public void insertExaminee(@ModelAttribute final Examinee examinee);
     public void insertExamData(@ModelAttribute final ExamData examData);
     public void updateExaminee(@ModelAttribute final Examinee examinee);
