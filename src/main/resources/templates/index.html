@@ -11,14 +11,30 @@
 <table>
     <thead>
     <tr>
-        <th>受験者名</th>
-        <th>試験実施日</th>
-        <th>国語</th>
-        <th>数学</th>
-        <th>英語</th>
-        <th>社会</th>
-        <th>理科</th>
-        <th>合計</th>
+        <th>
+            <span class="sort-icon">受験者名</span>
+        </th>
+        <th>
+            <span class="sort-icon">試験実施日</span>
+        </th>
+        <th>
+            <span class="sort-icon">国語</span>
+        </th>
+        <th>
+            <span class="sort-icon">数学</span>
+        </th>
+        <th>
+            <span class="sort-icon">英語</span>
+        </th>
+        <th>
+            <span class="sort-icon">社会</span>
+        </th>
+        <th>
+            <span class="sort-icon">理科</span>
+        </th>
+        <th>
+            <span class="sort-icon">合計</span>
+        </th>
     </tr>
     </thead>
     <tbody>
@@ -43,7 +59,9 @@
             </a>
             <form th:action="@{/delete-one}" method="post">
                 <input type="hidden" name="id" th:value="${ex.id}" />
-                <button type="submit">削除</button>
+                <input type="hidden" name="exName" th:value="${ex.name}" />
+                <input type="hidden" name="exDate" th:value="${ex.date}" />
+                <button type="submit" onclick="return confirmDelete(this.form)">削除</button>
             </form>
         </td>
     </tr>
@@ -75,7 +93,7 @@
             </select>
             <input type="number" name="science" placeholder="理科" required class="content-input" />
         </div>
-        <button type="submit">送信</button>
+        <button type="submit">登録</button>
     </form>
 </footer>
 </html>

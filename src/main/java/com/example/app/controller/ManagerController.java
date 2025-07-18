@@ -5,7 +5,6 @@ import com.example.app.model.ExamData;
 import com.example.app.model.ExamManager;
 import com.example.app.model.Examinee;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

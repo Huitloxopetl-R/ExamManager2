@@ -1,4 +1,4 @@
-const setSub() = () => {
+const setSub = () => {
     const form = document.querySelector("form");
     ["japaneseHistory", "worldHistory", "geography", "physics", "chemistry", "biology"].forEach(sub => {
         const prev = form.querySelector(`input[name="${sub}"]`);
@@ -24,6 +24,13 @@ const setSub() = () => {
         hidden.value = science;
         form.appendChild(hidden);
     }
+};
+
+const confirmDelete = (form) => {
+    console.log("test");
+    const name = form.querySelector("[name='exName']").value;
+    const date = form.querySelector("[name='exDate']").value;
+    return window.confirm(`${name}さんの${date}の試験データを削除しますか\nよろしいですか`);
 };
 
 document.addEventListener('DOMContentLoaded', setSub);
