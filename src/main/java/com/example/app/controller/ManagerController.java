@@ -18,10 +18,19 @@ import java.util.List;
 public class ManagerController {
     @Autowired
     private ManagerMapper mapper;
+    private final boolean[] sortedAscend = new boolean[7];
 
     @GetMapping("/")
     public String index(final Model model) {
         final List<ExamManager> exResults = mapper.findAll();
+        model.addAttribute("examResults", exResults);
+        return "index";
+    }
+
+    @GetMapping("/sort")
+    public String sort(@RequestParam("pattern") final int pattern, final Model model) {
+        final List<ExamManager> exResults = mapper.sort(pattern, sortedAscend[pattern]);
+        sortedAscend[pattern] = !sortedAscend[pattern];
         model.addAttribute("examResults", exResults);
         return "index";
     }

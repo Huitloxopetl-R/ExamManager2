@@ -12,28 +12,42 @@
     <thead>
     <tr>
         <th>
-            <span class="sort-icon">受験者名</span>
+            受験者名
         </th>
         <th>
-            <span class="sort-icon">試験実施日</span>
+            <a th:href="@{/sort(pattern=0)}" class="sort-icon" onclick="clicked(0)">
+                試験実施日
+            </a>
         </th>
         <th>
-            <span class="sort-icon">国語</span>
+            <a th:href="@{/sort(pattern=1)}" class="sort-icon" onclick="clicked(1)">
+                国語
+            </a>
         </th>
         <th>
-            <span class="sort-icon">数学</span>
+            <a th:href="@{/sort(pattern=2)}" class="sort-icon" onclick="clicked(2)">
+                数学
+            </a>
         </th>
         <th>
-            <span class="sort-icon">英語</span>
+            <a th:href="@{/sort(pattern=3)}" class="sort-icon" onclick="clicked(3)">
+                英語
+            </a>
         </th>
         <th>
-            <span class="sort-icon">社会</span>
+            <a th:href="@{/sort(pattern=4)}" class="sort-icon" onclick="clicked(4)">
+                社会
+            </a>
         </th>
         <th>
-            <span class="sort-icon">理科</span>
+            <a th:href="@{/sort(pattern=5)}" class="sort-icon" onclick="clicked(5)">
+                理科
+            </a>
         </th>
         <th>
-            <span class="sort-icon">合計</span>
+            <a th:href="@{/sort(pattern=6)}" class="sort-icon" onclick="clicked(6)">
+                合計
+            </a>
         </th>
     </tr>
     </thead>
