@@ -54,6 +54,38 @@
     <select id="findUpdatee" resultType="com.example.app.model.ExamManager">
         SELECT * FROM examinee AS e JOIN exam_data AS ed ON e.id=ed.id WHERE e.id=#{id}
     </select>
+    <select id="sort" resultType="com.example.app.model.ExamManager">
+        SELECT * FROM examinee AS e JOIN exam_data AS ed ON e.id=ed.id ORDER BY
+        <choose>
+            <when test="pattern == 0">
+                date
+            </when>
+            <when test="pattern == 1">
+                japanese
+            </when>
+            <when test="pattern == 2">
+                math
+            </when>
+            <when test="pattern == 3">
+                english
+            </when>
+            <when test="pattern == 4">
+
+            </when>
+            <when test="pattern == 5">
+
+            </when>
+            <when test="pattern == 6">
+
+            </when>
+            <otherwise>
+                date
+            </otherwise>
+        </choose>
+        <if test="sortedAscend">
+            DESC
+        </if>
+    </select>
     <update id="updateExaminee">
         UPDATE examinee
         <set>

@@ -11,8 +11,7 @@ import java.util.List;
 public interface ManagerMapper {
     public List<ExamManager> findAll();
     public ExamManager findUpdatee(final int id);
-
-    // TODO: @ModelAttributeはここで使用しても無効だという話をしたと思います。どういう意図で書いているのでしょうか。
+    public List<ExamManager> sort(final int pattern, final boolean sortedAscend);
     public void insertExaminee(final Examinee examinee);
     public void insertExamData(final ExamData examData);
     public void updateExaminee(final Examinee examinee);
