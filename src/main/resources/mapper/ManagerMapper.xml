@@ -57,26 +57,52 @@
     <select id="sort" resultType="com.example.app.model.ExamManager">
         SELECT * FROM examinee AS e JOIN exam_data AS ed ON e.id=ed.id ORDER BY
         <choose>
-            <when test="pattern == 0">
+            <when test="req.pattern == 0">
                 date
             </when>
-            <when test="pattern == 1">
+            <when test="req.pattern == 1">
                 japanese
             </when>
-            <when test="pattern == 2">
+            <when test="req.pattern == 2">
                 math
             </when>
-            <when test="pattern == 3">
+            <when test="req.pattern == 3">
                 english
             </when>
-            <when test="pattern == 4">
-
+            <when test="req.pattern == 4">
+                <choose>
+                    <when test="req.societySub == 'japaneseHistory'">
+                        japanese_history
+                    </when>
+                    <when test="req.societySub == 'worldHistory'">
+                        world_history
+                    </when>
+                    <when test="req.societySub == 'geography'">
+                        geography
+                    </when>
+                    <otherwise>
+                        GREATEST(COALESCE(japanese_history, 0), COALESCE(world_history, 0), COALESCE(geography, 0))
+                    </otherwise>
+                </choose>
             </when>
-            <when test="pattern == 5">
-
+            <when test="req.pattern == 5">
+                <choose>
+                    <when test="req.scienceSub == 'physics'">
+                        physics
+                    </when>
+                    <when test="req.scienceSub == 'chemistry'">
+                        chemistry
+                    </when>
+                    <when test="req.scienceSub == 'biology'">
+                        biology
+                    </when>
+                    <otherwise>
+                        GREATEST(COALESCE(physics, 0), COALESCE(chemistry, 0), COALESCE(biology, 0))
+                    </otherwise>
+                </choose>
             </when>
-            <when test="pattern == 6">
-
+            <when test="req.pattern == 6">
+                japanese + math + english + COALESCE(japanese_history, 0) + COALESCE(world_history, 0) + COALESCE(geography, 0) + COALESCE(physics, 0) + COALESCE(chemistry, 0) + COALESCE(biology, 0)
             </when>
             <otherwise>
                 date
@@ -162,8 +188,5 @@
     </delete>
     <delete id="deleteOneExamData">
         DELETE FROM exam_data WHERE id=#{id}
-    </delete>
-    <delete id="deleteName">
-        DELETE FROM examinee AS e JOIN exam_data AS ed ON e.id=ed.id WHERE name=#{name}
     </delete>
 </mapper>

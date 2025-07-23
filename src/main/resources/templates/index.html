@@ -15,39 +15,58 @@
             受験者名
         </th>
         <th>
-            <a th:href="@{/sort(pattern=0)}" class="sort-icon" onclick="clicked(0)">
-                試験実施日
-            </a>
+            <form th:action="@{/sort}" method="get">
+                <input type="hidden" name="pattern" th:value="0" />
+                <div class="sort-icon">試験実施日</div>
+            </form>
         </th>
         <th>
-            <a th:href="@{/sort(pattern=1)}" class="sort-icon" onclick="clicked(1)">
-                国語
-            </a>
+            <form th:action="@{/sort}" method="get">
+                <input type="hidden" name="pattern" th:value="1" />
+                <div class="sort-icon">国語</div>
+            </form>
         </th>
         <th>
-            <a th:href="@{/sort(pattern=2)}" class="sort-icon" onclick="clicked(2)">
-                数学
-            </a>
+            <form th:action="@{/sort}" method="get">
+                <input type="hidden" name="pattern" th:value="2" />
+                <div class="sort-icon">数学</div>
+            </form>
         </th>
         <th>
-            <a th:href="@{/sort(pattern=3)}" class="sort-icon" onclick="clicked(3)">
-                英語
-            </a>
+            <form th:action="@{/sort}" method="get">
+                <input type="hidden" name="pattern" th:value="3" />
+                <div class="sort-icon">英語</div>
+            </form>
         </th>
         <th>
-            <a th:href="@{/sort(pattern=4)}" class="sort-icon" onclick="clicked(4)">
-                社会
-            </a>
+            <form th:action="@{/sort}" method="get">
+                <input type="hidden" name="pattern" th:value="4" />
+                <select name="societySub" class="societySub">
+                    <option value="">デフォルト</option>
+                    <option value="japaneseHistory">日本史</option>
+                    <option value="worldHistory">世界史</option>
+                    <option value="geography">地理</option>
+                </select>
+                <div class="sort-icon">社会</div>
+            </form>
         </th>
         <th>
-            <a th:href="@{/sort(pattern=5)}" class="sort-icon" onclick="clicked(5)">
-                理科
-            </a>
+            <form th:action="@{/sort}" method="get">
+                <input type="hidden" name="pattern" th:value="5" />
+                <select name="scienceSub" class="scienceSub">
+                    <option value="">デフォルト</option>
+                    <option value="physics">物理</option>
+                    <option value="chemistry">化学</option>
+                    <option value="biology">生物</option>
+                </select>
+                <div class="sort-icon">理科</div>
+            </form>
         </th>
         <th>
-            <a th:href="@{/sort(pattern=6)}" class="sort-icon" onclick="clicked(6)">
-                合計
-            </a>
+            <form th:action="@{/sort}" method="get">
+                <input type="hidden" name="pattern" th:value="6" />
+                <div class="sort-icon">合計</div>
+            </form>
         </th>
     </tr>
     </thead>
@@ -73,8 +92,6 @@
             </a>
             <form th:action="@{/delete-one}" method="post">
                 <input type="hidden" name="id" th:value="${ex.id}" />
-                <input type="hidden" name="exName" th:value="${ex.name}" />
-                <input type="hidden" name="exDate" th:value="${ex.date}" />
                 <button type="submit" onclick="return confirmDelete(this.form)">削除</button>
             </form>
         </td>
@@ -90,7 +107,7 @@
         <input type="number" name="math" placeholder="数学" required />
         <input type="number" name="english" placeholder="英語" required />
         <div class="sub-box">
-            <select name="societySub" id="societySub">
+            <select name="societySub" class="societySub">
                 <option value="">社会科目を選択</option>
                 <option value="japaneseHistory">日本史</option>
                 <option value="worldHistory">世界史</option>
@@ -99,7 +116,7 @@
             <input type="number" name="society" placeholder="社会" required />
         </div>
         <div class="sub-box">
-            <select name="scienceSub" id="scienceSub">
+            <select name="scienceSub" class="scienceSub">
                 <option value="">理科科目を選択</option>
                 <option value="physics">物理</option>
                 <option value="chemistry">化学</option>

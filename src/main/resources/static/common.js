@@ -33,5 +33,13 @@ const confirmDelete = (form) => {
     return window.confirm(`${name}さんの${date}の試験データを削除しますか\nよろしいですか`);
 };
 
+const doSorting = () => {
+    document.querySelectorAll(".sort-icon").forEach(e => {
+        e.style.cursor = "pointer";
+        e.addEventListener("click", () => e.closest("form").submit());
+    });
+};
+
+document.addEventListener('DOMContentLoaded', doSorting);
 document.addEventListener('DOMContentLoaded', setSub);
 document.querySelector("form").addEventListener("submit", (e) => setSub());

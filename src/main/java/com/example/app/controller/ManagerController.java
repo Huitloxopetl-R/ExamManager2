@@ -4,6 +4,7 @@ import com.example.app.mapper.ManagerMapper;
 import com.example.app.model.ExamData;
 import com.example.app.model.ExamManager;
 import com.example.app.model.Examinee;
+import com.example.app.model.SortRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -19,6 +21,10 @@ public class ManagerController {
     @Autowired
     private ManagerMapper mapper;
     private final boolean[] sortedAscend = new boolean[7];
+
+    {
+        Arrays.fill(sortedAscend, true);
+    }
 
     @GetMapping("/")
     public String index(final Model model) {
@@ -28,9 +34,10 @@ public class ManagerController {
     }
 
     @GetMapping("/sort")
-    public String sort(@RequestParam("pattern") final int pattern, final Model model) {
-        final List<ExamManager> exResults = mapper.sort(pattern, sortedAscend[pattern]);
-        sortedAscend[pattern] = !sortedAscend[pattern];
+    public String sort(@ModelAttribute final SortRequest sortRequest, final Model model) {
+        final int i = sortRequest.getPattern();
+        final List<ExamManager> exResults = mapper.sort(sortRequest, sortedAscend[i]);
+        sortedAscend[i] = !sortedAscend[i];
         model.addAttribute("examResults", exResults);
         return "index";
     }
