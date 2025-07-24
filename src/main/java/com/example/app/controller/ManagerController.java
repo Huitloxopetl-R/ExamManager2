@@ -29,6 +29,8 @@ public class ManagerController {
     @GetMapping("/")
     public String index(final Model model) {
         final List<ExamManager> exResults = mapper.findAll();
+        model.addAttribute("req", new SortRequest());
+        model.addAttribute("isAscend", null);
         model.addAttribute("examResults", exResults);
         return "index";
     }
@@ -38,6 +40,8 @@ public class ManagerController {
         final int i = sortRequest.getPattern();
         final List<ExamManager> exResults = mapper.sort(sortRequest, sortedAscend[i]);
         sortedAscend[i] = !sortedAscend[i];
+        model.addAttribute("req", sortRequest);
+        model.addAttribute("isAscend", sortedAscend[i]);
         model.addAttribute("examResults", exResults);
         return "index";
     }
@@ -48,6 +52,8 @@ public class ManagerController {
         examData.setId(examinee.getId());
         mapper.insertExamData(examData);
         final List<ExamManager> exResults = mapper.findAll();
+        model.addAttribute("req", new SortRequest());
+        model.addAttribute("isAscend", null);
         model.addAttribute("examResults", exResults);
         return "index";
     }
@@ -55,6 +61,8 @@ public class ManagerController {
     @GetMapping("/update")
     public String updateTarget(@ModelAttribute final ExamManager examManager, @RequestParam("id") final int id, final Model model) {
         final ExamManager exResult = mapper.findUpdatee(id);
+        model.addAttribute("req", new SortRequest());
+        model.addAttribute("isAscend", null);
         model.addAttribute("examResult", exResult);
         return "update";
     }
@@ -64,6 +72,8 @@ public class ManagerController {
         mapper.updateExaminee(examinee);
         mapper.updateExamData(examData);
         final List<ExamManager> exResults = mapper.findAll();
+        model.addAttribute("req", new SortRequest());
+        model.addAttribute("isAscend", null);
         model.addAttribute("examResults", exResults);
         return "index";
     }
@@ -73,14 +83,8 @@ public class ManagerController {
         mapper.deleteOneExaminee(examinee);
         mapper.deleteOneExamData(examinee);
         final List<ExamManager> exResults = mapper.findAll();
-        model.addAttribute("examResults", exResults);
-        return "index";
-    }
-
-    @PostMapping("/delete-Name")
-    public String deleteName(@ModelAttribute final Examinee examinee, final Model model) {
-        mapper.deleteName(examinee);
-        final List<ExamManager> exResults = mapper.findAll();
+        model.addAttribute("req", new SortRequest());
+        model.addAttribute("isAscend", null);
         model.addAttribute("examResults", exResults);
         return "index";
     }

@@ -72,13 +72,13 @@
             <when test="req.pattern == 4">
                 <choose>
                     <when test="req.societySub == 'japaneseHistory'">
-                        japanese_history
+                        japanese_history IS NULL, japanese_history
                     </when>
                     <when test="req.societySub == 'worldHistory'">
-                        world_history
+                        world_history IS NULL, world_history
                     </when>
                     <when test="req.societySub == 'geography'">
-                        geography
+                        geography IS NULL, geography
                     </when>
                     <otherwise>
                         GREATEST(COALESCE(japanese_history, 0), COALESCE(world_history, 0), COALESCE(geography, 0))
@@ -88,13 +88,13 @@
             <when test="req.pattern == 5">
                 <choose>
                     <when test="req.scienceSub == 'physics'">
-                        physics
+                        physics IS NULL, physics
                     </when>
                     <when test="req.scienceSub == 'chemistry'">
-                        chemistry
+                        chemistry IS NULL, chemistry
                     </when>
                     <when test="req.scienceSub == 'biology'">
-                        biology
+                        biology IS NULL, biology
                     </when>
                     <otherwise>
                         GREATEST(COALESCE(physics, 0), COALESCE(chemistry, 0), COALESCE(biology, 0))
