@@ -17,7 +17,7 @@
         <th>
             <form th:action="@{/sort}" method="get">
                 <input type="hidden" name="pattern" th:value="0" />
-                <div class="sort-icon">試験実施日</div>
+                <div class="sort-icon [[${isAscend != null} ? (${isAscend} ? 'asc' : 'desc') : '']]">試験実施日</div>
             </form>
         </th>
         <th>
@@ -39,9 +39,9 @@
             </form>
         </th>
         <th>
-            <form th:action="@{/sort}" method="get">
+            <form th:action="@{/sort}" method="get" th:object="${req}">
                 <input type="hidden" name="pattern" th:value="4" />
-                <select name="societySub" class="societySub">
+                <select name="societySub" class="societySub" th:field="*{societySub}">
                     <option value="">デフォルト</option>
                     <option value="japaneseHistory">日本史</option>
                     <option value="worldHistory">世界史</option>
@@ -51,9 +51,9 @@
             </form>
         </th>
         <th>
-            <form th:action="@{/sort}" method="get">
+            <form th:action="@{/sort}" method="get" th:object="${req}">
                 <input type="hidden" name="pattern" th:value="5" />
-                <select name="scienceSub" class="scienceSub">
+                <select name="scienceSub" class="scienceSub" th:field="*{scienceSub}">
                     <option value="">デフォルト</option>
                     <option value="physics">物理</option>
                     <option value="chemistry">化学</option>

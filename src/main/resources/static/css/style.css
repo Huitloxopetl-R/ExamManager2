@@ -16,5 +16,13 @@ th {
     align-items: center;
 }
 .sort-icon {
-
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+}
+.sort-icon.asc::after {
+    content: "▲";
+}
+.sort-icon.desc::after {
+    content: "▼";
 }
