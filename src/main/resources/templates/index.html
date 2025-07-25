@@ -17,25 +17,29 @@
         <th>
             <form th:action="@{/sort}" method="get">
                 <input type="hidden" name="pattern" th:value="0" />
-                <div class="sort-icon [[${isAscend != null} ? (${isAscend} ? 'asc' : 'desc') : '']]">試験実施日</div>
+                <div class="sort-icon"
+                     th:classappend="${sortPattern == 0} ? (${isAscend} ? 'asc' : 'desc') : ''">試験実施日</div>
             </form>
         </th>
         <th>
             <form th:action="@{/sort}" method="get">
                 <input type="hidden" name="pattern" th:value="1" />
-                <div class="sort-icon">国語</div>
+                <div class="sort-icon"
+                     th:classappend="${sortPattern == 1} ? (${isAscend} ? 'asc' : 'desc') : ''">国語</div>
             </form>
         </th>
         <th>
             <form th:action="@{/sort}" method="get">
                 <input type="hidden" name="pattern" th:value="2" />
-                <div class="sort-icon">数学</div>
+                <div class="sort-icon"
+                     th:classappend="${sortPattern == 2} ? (${isAscend} ? 'asc' : 'desc') : ''">数学</div>
             </form>
         </th>
         <th>
             <form th:action="@{/sort}" method="get">
                 <input type="hidden" name="pattern" th:value="3" />
-                <div class="sort-icon">英語</div>
+                <div class="sort-icon"
+                     th:classappend="${sortPattern == 3} ? (${isAscend} ? 'asc' : 'desc') : ''">英語</div>
             </form>
         </th>
         <th>
@@ -47,7 +51,8 @@
                     <option value="worldHistory">世界史</option>
                     <option value="geography">地理</option>
                 </select>
-                <div class="sort-icon">社会</div>
+                <div class="sort-icon"
+                     th:classappend="${sortPattern == 4} ? (${isAscend} ? 'asc' : 'desc') : ''">社会</div>
             </form>
         </th>
         <th>
@@ -59,13 +64,15 @@
                     <option value="chemistry">化学</option>
                     <option value="biology">生物</option>
                 </select>
-                <div class="sort-icon">理科</div>
+                <div class="sort-icon"
+                     th:classappend="${sortPattern == 5} ? (${isAscend} ? 'asc' : 'desc') : ''">理科</div>
             </form>
         </th>
         <th>
             <form th:action="@{/sort}" method="get">
                 <input type="hidden" name="pattern" th:value="6" />
-                <div class="sort-icon">合計</div>
+                <div class="sort-icon"
+                     th:classappend="${sortPattern == 6} ? (${isAscend} ? 'asc' : 'desc') : ''">合計</div>
             </form>
         </th>
     </tr>
