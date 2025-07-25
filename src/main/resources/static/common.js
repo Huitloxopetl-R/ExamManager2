@@ -36,14 +36,14 @@ const confirmDelete = (form) => {
 const doSorting = () => {
     document.querySelectorAll(".sort-icon").forEach(e => e.addEventListener("click", () => {
         e.closest("form").submit();
-        const elem = e.target.classList;
-        if(elem.contains("asc")) {
-            elem.replace("asc", "desc");
-        } else if(elem.contains("desc")) {
-            elem.replace("desc", "asc");
-        } else {
-            elem.add("desc");
-        }
+//        const elem = e.target.classList;
+//        if(elem.contains("asc")) {
+//            elem.replace("asc", "desc");
+//        } else if(elem.contains("desc")) {
+//            elem.replace("desc", "asc");
+//        } else {
+//            elem.add("desc");
+//        }
     }));
 };
 
