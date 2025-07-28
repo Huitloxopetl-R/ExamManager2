@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class ManagerController {
     @Autowired
     private ManagerMapper mapper;
@@ -55,6 +55,9 @@ public class ManagerController {
         mapper.insertExaminee(examinee);
         examData.setId(examinee.getId());
         mapper.insertExamData(examData);
+        if(examinee.getId() != examData.getId()) {
+            throw new RuntimeException("Non-exist id");
+        }
         final List<ExamManager> exResults = mapper.findAll();
         model.addAttribute("req", new SortRequest());
         model.addAttribute("sortPattern", null);
@@ -77,6 +80,9 @@ public class ManagerController {
     public String updateResult(@ModelAttribute final Examinee examinee, @ModelAttribute final ExamData examData, final Model model) {
         mapper.updateExaminee(examinee);
         mapper.updateExamData(examData);
+        if(examinee.getId() != examData.getId()) {
+            throw new RuntimeException("Non-exist id");
+        }
         final List<ExamManager> exResults = mapper.findAll();
         model.addAttribute("req", new SortRequest());
         model.addAttribute("sortPattern", null);
@@ -85,8 +91,8 @@ public class ManagerController {
         return "index";
     }
 
-    @PostMapping("/delete-one")
-    public String deleteOne(@ModelAttribute final Examinee examinee, final Model model) {
+    @PostMapping("/delete")
+    public String delete(@ModelAttribute final Examinee examinee, final Model model) {
         mapper.deleteExaminee(examinee);
         final List<ExamManager> exResults = mapper.findAll();
         model.addAttribute("req", new SortRequest());

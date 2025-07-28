@@ -14,6 +14,8 @@ public class ExamData {
     private int physics;
     private int chemistry;
     private int biology;
+
+    public int getId(){ return id; }
     public void setId(final int id){ this.id = id; }
 
     private int society;

@@ -97,7 +97,7 @@
             <a th:href="@{/update(id=${ex.id})}">
                 <button type="submit">更新</button>
             </a>
-            <form th:action="@{/delete-one}" method="post">
+            <form th:action="@{/delete}" method="post">
                 <input type="hidden" name="id" th:value="${ex.id}" />
                 <button type="submit" onclick="return confirmDelete(this.form)">削除</button>
             </form>

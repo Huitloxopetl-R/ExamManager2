@@ -183,10 +183,7 @@
         </set>
         WHERE id=#{id}
     </update>
-    <delete id="deleteOneExaminee">
+    <delete id="deleteExaminee">
         DELETE FROM examinee WHERE id=#{id}
-    </delete>
-    <delete id="deleteOneExamData">
-        DELETE FROM exam_data WHERE id=#{id}
     </delete>
 </mapper>
