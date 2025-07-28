@@ -42,10 +42,10 @@
             <when test="scienceSub == 'physics'">
                 physics
             </when>
-            <when test="scienceSub != 'chemistry'">
+            <when test="scienceSub == 'chemistry'">
                 chemistry
             </when>
-            <when test="scienceSub != 'biology'">
+            <when test="scienceSub == 'biology'">
                 biology
             </when>
         </choose>

@@ -18,7 +18,5 @@ public interface ManagerMapper {
     public void insertExamData(final ExamData examData);
     public void updateExaminee(final Examinee examinee);
     public void updateExamData(final ExamData examData);
-    public void deleteOneExaminee(final Examinee examinee);
-    public void deleteOneExamData(final Examinee examinee);
-    public void deleteName(final Examinee examinee);
+    public void deleteExaminee(final Examinee examinee);
 }

@@ -7,6 +7,7 @@ import com.example.app.model.Examinee;
 import com.example.app.model.SortRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
+@Transactional
 public class ManagerController {
     @Autowired
     private ManagerMapper mapper;
@@ -85,8 +87,7 @@ public class ManagerController {
 
     @PostMapping("/delete-one")
     public String deleteOne(@ModelAttribute final Examinee examinee, final Model model) {
-        mapper.deleteOneExaminee(examinee);
-        mapper.deleteOneExamData(examinee);
+        mapper.deleteExaminee(examinee);
         final List<ExamManager> exResults = mapper.findAll();
         model.addAttribute("req", new SortRequest());
         model.addAttribute("sortPattern", null);

@@ -1,0 +1,15 @@
+{
+  "examinee": {
+    "name": "Logos",
+    "date": "2023-09-23"
+  },
+  "examData": {
+    "japanese": 96,
+    "math": 98,
+    "english": 91,
+    "society": 81,
+    "science": 97,
+    "societySub": "geography",
+    "scienceSub": "physics"
+  }
+}
