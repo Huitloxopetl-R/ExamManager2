@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
+@Transactional
 public class ManagerController {
     @Autowired
     private ManagerMapper mapper;
@@ -50,7 +51,6 @@ public class ManagerController {
     }
 
     @PostMapping("/create")
-    @Transactional
     public String insertResult(@ModelAttribute final Examinee examinee, @ModelAttribute final ExamData examData, final Model model) {
         mapper.insertExaminee(examinee);
         examData.setId(examinee.getId());
@@ -74,7 +74,6 @@ public class ManagerController {
     }
 
     @PostMapping("/update")
-    @Transactional
     public String updateResult(@ModelAttribute final Examinee examinee, @ModelAttribute final ExamData examData, final Model model) {
         mapper.updateExaminee(examinee);
         mapper.updateExamData(examData);
@@ -87,7 +86,6 @@ public class ManagerController {
     }
 
     @PostMapping("/delete-one")
-    @Transactional
     public String deleteOne(@ModelAttribute final Examinee examinee, final Model model) {
         mapper.deleteOneExaminee(examinee);
         mapper.deleteOneExamData(examinee);
