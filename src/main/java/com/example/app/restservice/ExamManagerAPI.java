@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 @RequestMapping("/api/exam-manager")
 public class ExamManagerAPI {
     @Autowired
@@ -26,6 +26,9 @@ public class ExamManagerAPI {
         final int id = examReq.getExaminee().getId();
         examReq.getExamData().setId(id);
         mapper.insertExamData(examReq.getExamData());
+        if(id != examReq.getExamData().getId()) {
+            throw new RuntimeException("Non-exist id");
+        }
     }
 
     @PostMapping("/update")
@@ -34,10 +37,11 @@ public class ExamManagerAPI {
         final int id = examReq.getExaminee().getId();
         examReq.getExamData().setId(id);
         mapper.updateExamData(examReq.getExamData());
+        if(id != examReq.getExamData().getId()) {
+            throw new RuntimeException("Non-exist id");
+        }
     }
 
     @PostMapping("/delete")
-    public void delete(@RequestBody final Examinee examinee) {
-        mapper.deleteExaminee(examinee);
-    }
+    public void delete(@RequestBody final Examinee examinee){ mapper.deleteExaminee(examinee); }
 }
