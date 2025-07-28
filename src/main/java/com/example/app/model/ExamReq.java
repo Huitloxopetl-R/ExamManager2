@@ -3,7 +3,7 @@ package com.example.app.model;
 import lombok.Data;
 
 @Data
-public class InsertExamReq {
+public class ExamReq {
     private Examinee examinee;
     private ExamData examData;
 

@@ -87,8 +87,7 @@ public class ManagerController {
 
     @PostMapping("/delete-one")
     public String deleteOne(@ModelAttribute final Examinee examinee, final Model model) {
-        mapper.deleteOneExaminee(examinee);
-        mapper.deleteOneExamData(examinee);
+        mapper.deleteExaminee(examinee);
         final List<ExamManager> exResults = mapper.findAll();
         model.addAttribute("req", new SortRequest());
         model.addAttribute("sortPattern", null);
