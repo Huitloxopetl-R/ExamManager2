@@ -1,0 +1,15 @@
+{
+  "examinee": {
+    "name": "Keter",
+    "date": "2023-09-23"
+  },
+  "examData": {
+    "japanese": 96,
+    "math": 98,
+    "english": 91,
+    "society": 89,
+    "science": 87,
+    "societySub": "geography",
+    "scienceSub": "biology"
+  }
+}

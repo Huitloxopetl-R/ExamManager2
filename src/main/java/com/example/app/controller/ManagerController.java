@@ -7,6 +7,7 @@ import com.example.app.model.Examinee;
 import com.example.app.model.SortRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -49,6 +50,7 @@ public class ManagerController {
     }
 
     @PostMapping("/create")
+    @Transactional
     public String insertResult(@ModelAttribute final Examinee examinee, @ModelAttribute final ExamData examData, final Model model) {
         mapper.insertExaminee(examinee);
         examData.setId(examinee.getId());
@@ -72,6 +74,7 @@ public class ManagerController {
     }
 
     @PostMapping("/update")
+    @Transactional
     public String updateResult(@ModelAttribute final Examinee examinee, @ModelAttribute final ExamData examData, final Model model) {
         mapper.updateExaminee(examinee);
         mapper.updateExamData(examData);
@@ -84,6 +87,7 @@ public class ManagerController {
     }
 
     @PostMapping("/delete-one")
+    @Transactional
     public String deleteOne(@ModelAttribute final Examinee examinee, final Model model) {
         mapper.deleteOneExaminee(examinee);
         mapper.deleteOneExamData(examinee);
